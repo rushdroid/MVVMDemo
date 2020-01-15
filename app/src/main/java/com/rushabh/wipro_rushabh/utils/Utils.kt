@@ -2,9 +2,6 @@ package com.rushabh.wipro_rushabh.utils
 
 import android.content.Context
 import android.net.ConnectivityManager
-import java.text.ParseException
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 class Utils {

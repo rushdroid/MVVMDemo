@@ -38,6 +38,7 @@ class FactAdapter(
             .load(row.imageHref)
             .placeholder(R.drawable.img_place_holder)
             .error(R.drawable.img_place_holder)
+            .centerCrop()
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.imgPic)
     }

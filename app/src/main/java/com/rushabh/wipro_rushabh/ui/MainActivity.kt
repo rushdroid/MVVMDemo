@@ -1,4 +1,4 @@
-package com.rushabh.wipro_rushabh.activity
+package com.rushabh.wipro_rushabh.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

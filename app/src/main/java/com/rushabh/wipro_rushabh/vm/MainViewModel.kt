@@ -38,6 +38,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun getFactsFromAPI() {
 
+        isLoading.value = true
+        val list = db.factDAO().getAll()
+        if (list.size > 0) {
+            facts.postValue(list.get(0))
+            return
+        }
+
+
         if (!Utils.isConnectedToNetwork(context)) {
             isInternetAvailable.postValue(false)
             isLoading.postValue(false)
@@ -51,13 +59,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             .subscribeOn(Schedulers.io())
             .subscribe({
                 facts.postValue(it)
+                db.factDAO().insert(it)
                 isLoading.postValue(false)
             }, {
                 print(it.message)
                 isLoading.postValue(false)
             })
-
-
     }
 
     override fun onCleared() {

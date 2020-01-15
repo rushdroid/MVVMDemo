@@ -1,7 +1,8 @@
-package com.rushabh.wipro_rushabh
+package com.rushabh.wipro_rushabh.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.rushabh.wipro_rushabh.R
 
 class MainActivity : AppCompatActivity() {
 

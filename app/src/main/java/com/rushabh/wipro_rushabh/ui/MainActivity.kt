@@ -1,5 +1,6 @@
 package com.rushabh.wipro_rushabh.ui
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -21,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getFacts().observe(this, Observer {
             print(it)
-
         })
 
         viewModel.isLoading().observe(this, Observer {
@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.isInternetAvailable().observe(this, Observer {
-            if (!it) {
-
+            if (it) {
+                startActivity(Intent(this, ErrorActivity::class.java))
             }
         })
         swipe_to_refresh_layout.setOnRefreshListener {

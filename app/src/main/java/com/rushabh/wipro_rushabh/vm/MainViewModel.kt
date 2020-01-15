@@ -47,7 +47,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
         if (!Utils.isConnectedToNetwork(context)) {
-            isInternetAvailable.postValue(false)
+            isInternetAvailable.postValue(true)
             isLoading.postValue(false)
             return
         }
@@ -64,6 +64,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             }, {
                 print(it.message)
                 isLoading.postValue(false)
+                isInternetAvailable.postValue(true)
             })
     }
 

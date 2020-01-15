@@ -5,7 +5,10 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.rushabh.wipro_rushabh.R
+import com.rushabh.wipro_rushabh.adapter.FactAdapter
 import com.rushabh.wipro_rushabh.vm.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,6 +25,16 @@ class MainActivity : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getFacts().observe(this, Observer {
             print(it)
+            supportActionBar?.setTitle(it.title)
+            swipe_to_refresh_layout.isRefreshing = false
+            recyclerView.layoutManager = LinearLayoutManager(this)
+            recyclerView.addItemDecoration(
+                DividerItemDecoration(
+                    this,
+                    LinearLayoutManager.VERTICAL
+                )
+            )
+            recyclerView.adapter = FactAdapter(it, this)
         })
 
         viewModel.isLoading().observe(this, Observer {
@@ -33,15 +46,19 @@ class MainActivity : AppCompatActivity() {
         })
 
         viewModel.isInternetAvailable().observe(this, Observer {
-            if (it) {
+            if (!it) {
                 startActivity(Intent(this, ErrorActivity::class.java))
             }
         })
         swipe_to_refresh_layout.setOnRefreshListener {
             viewModel.getFactsFromAPI()
         }
-        viewModel.getFactsFromAPI()
+
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getFactsFromAPI()
+    }
 
 }

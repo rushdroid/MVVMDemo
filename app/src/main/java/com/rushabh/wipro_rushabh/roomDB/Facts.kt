@@ -12,7 +12,7 @@ data class Facts(
     var uId: Int = 0,
     @TypeConverters(RowConverter::class)
     @SerializedName("rows")
-    val rows: List<Row> = emptyList(),
+    var rows: List<Row> = emptyList(),
     @SerializedName("title")
-    val title: String = ""
+    var title: String = ""
 )

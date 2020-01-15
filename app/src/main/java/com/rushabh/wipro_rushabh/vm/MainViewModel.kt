@@ -47,7 +47,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
         if (!Utils.isConnectedToNetwork(context)) {
-            isInternetAvailable.postValue(true)
+            isInternetAvailable.postValue(false)
             isLoading.postValue(false)
             return
         }
